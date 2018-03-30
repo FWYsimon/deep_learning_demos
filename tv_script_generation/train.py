@@ -9,7 +9,7 @@ import tensorflow as tf
 import models
 import util
 
-parser = argparse.ArgumentParser(description='image classification train')
+parser = argparse.ArgumentParser(description='tv scripts generation')
 
 # Location of data
 parser.add_argument('--save_dir', type=str, default='./save',

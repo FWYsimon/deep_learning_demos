@@ -1,11 +1,12 @@
 import numpy as np
 import argparse
 import tensorflow as tf
+import os
 
 import util
 import models
 
-parser = argparse.ArgumentParser(description='image classification train')
+parser = argparse.ArgumentParser(description='language translation')
 
 # Location of data
 parser.add_argument('--save_path', type=str, default='checkpoints/dev',
