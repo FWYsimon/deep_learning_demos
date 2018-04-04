@@ -67,7 +67,7 @@ class LSTM(object):
 	    :param input_data: Input data
 	    :return: Tuple (Logits, FinalState)
 	    """
-	    embed = get_embed(input_data)
-	    outputs, final_state = build_rnn(cell, embed)
+	    embed = self.get_embed(input_data)
+	    outputs, final_state = self.build_rnn(cell, embed)
 	    logits = tf.layers.dense(outputs, self.vocab_size)
 	    return logits, final_state

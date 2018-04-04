@@ -134,10 +134,10 @@ class SeqToSeq(object):
 	    output_layer = Dense(self.target_vocab_size,
 	                         kernel_initializer = tf.truncated_normal_initializer(mean = 0.0, stddev=0.1))
 	    with tf.variable_scope("decode"):
-	        training_decoder_output = decoding_layer_train(encoder_state, dec_cell, dec_embed_input, 
+	        training_decoder_output = self.decoding_layer_train(encoder_state, dec_cell, dec_embed_input, 
 	                                                       target_sequence_length, max_target_sequence_length, output_layer)
 	    with tf.variable_scope("decode", reuse=True):
-	        inference_decoder_output = decoding_layer_infer(encoder_state, dec_cell, dec_embeddings, start_of_sequence_id, 
+	        inference_decoder_output = self.decoding_layer_infer(encoder_state, dec_cell, dec_embeddings, start_of_sequence_id, 
 	                                                        end_of_sequence_id, max_target_sequence_length, output_layer)
 	    return training_decoder_output, inference_decoder_output
 
@@ -162,9 +162,9 @@ class SeqToSeq(object):
 	    :param target_vocab_to_int: Dictionary to go from the target words to an id
 	    :return: Tuple of (Training BasicDecoderOutput, Inference BasicDecoderOutput)
 	    """
-	    _, enc_state = encoding_layer(input_data, source_sequence_length)
-	    dec_input = process_decoder_input(target_data, target_vocab_to_int)
-	    training_decoder_output, inference_decoder_output = decoding_layer(dec_input,
+	    _, enc_state = self.encoding_layer(input_data, source_sequence_length)
+	    dec_input = self.process_decoder_input(target_data, target_vocab_to_int)
+	    training_decoder_output, inference_decoder_output = self.decoding_layer(dec_input,
 	                                                                       enc_state, 
 	                                                                       target_sequence_length, 
 	                                                                       max_target_sentence_length,

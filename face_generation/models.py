@@ -80,10 +80,10 @@ class GANs(object):
 	    :param out_channel_dim: The number of channels in the output image
 	    :return: A tuple of (discriminator loss, generator loss)
 	    """
-	    g_model = generator(input_z, self.out_channel_dim)
+	    g_model = self.generator(input_z, self.out_channel_dim)
 	    
-	    d_model_real, d_logits_real = discriminator(input_real)
-	    d_model_fake, d_logits_fake = discriminator(g_model, reuse=True)
+	    d_model_real, d_logits_real = self.discriminator(input_real)
+	    d_model_fake, d_logits_fake = self.discriminator(g_model, reuse=True)
 	    d_loss_real = tf.reduce_mean(
 	                  tf.nn.sigmoid_cross_entropy_with_logits(logits=d_logits_real, 
 	                                                          labels=tf.ones_like(d_logits_real)))
